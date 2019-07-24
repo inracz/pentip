@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Events\UserCreated;
 
 class User extends Authenticatable
 {
@@ -36,4 +37,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The event map for the model
+     * 
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => UserCreated::class
+    ];
+
+    /**
+     * Profile relationship
+     */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 }

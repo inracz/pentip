@@ -12,8 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/users/{user}', 'UsersController@show')->name('users.show');
+Route::get('/profile/edit', 'UsersController@edit')->name('users.edit');
+Route::patch('/profile', 'UsersController@update')->name('users.update');
 
 Auth::routes();
 
