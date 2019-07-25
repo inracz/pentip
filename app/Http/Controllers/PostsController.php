@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class PostsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
     }
 
     public function store()
@@ -32,6 +33,7 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
+        $post->content = Markdown::convertToHTML($post->content);
         return view('posts.show', compact('post'));
     }
 }

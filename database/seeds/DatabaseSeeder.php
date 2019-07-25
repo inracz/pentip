@@ -20,5 +20,14 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
         ]);
+
+        factory(App\User::class, 5)->create()->each(function($user) {
+            $postCount = rand(1,5);
+
+            for ($i = 0; $i < $postCount; $i++) {
+                $user->posts()->save(factory(App\Post::class)->make());
+            }
+        });
+
     }
 }
