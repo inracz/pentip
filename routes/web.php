@@ -19,6 +19,10 @@ Route::get('/users/{user}', 'UsersController@show')->name('users.show');
 Route::get('/profile/edit', 'UsersController@edit')->name('users.edit');
 Route::patch('/profile', 'UsersController@update')->name('users.update');
 
+Route::get('/posts/create', 'PostsController@create')->name('posts.create');
+Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
+Route::post('/posts', 'PostsController@store')->name('posts.store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
