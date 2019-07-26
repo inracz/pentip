@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comment extends Model
 {
     protected $guarded = [];
-
+    
     /**
      * User relationship
      */
@@ -17,10 +17,10 @@ class Post extends Model
     }
 
     /**
-     * Comments relationship
+     * Post relationship
      */
-    public function comments()
+    public function post()
     {
-        return $this->hasMany(Comment::class)->latest();
+        return $this->belongsTo(Post::class);
     }
 }

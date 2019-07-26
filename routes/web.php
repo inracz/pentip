@@ -23,6 +23,8 @@ Route::get('/posts/create', 'PostsController@create')->name('posts.create');
 Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
 Route::post('/posts', 'PostsController@store')->name('posts.store');
 
+Route::post('/posts/{post}/comments', 'CommentsController@store')->name('comments.store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
