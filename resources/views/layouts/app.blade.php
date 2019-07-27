@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <base href="{{ url('/') }}">
 </head>
 <body>
     <div id="app">
@@ -46,7 +48,6 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                    </div>
                 </li>
             @endguest
         </ul>

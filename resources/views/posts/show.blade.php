@@ -2,9 +2,22 @@
 
 @section('content')
     <h2>{{ $post->title }}</h2>
-    <p><em>{{ $post->description }}</em></p>
+    <p><a href="{{ route('users.show', $post->user->id) }}"><strong>{{ $post->user->name }}</strong></a>: <em>{{ $post->description }}</em></p>
 
     <hr>
+
+    @if ($post->user->id == auth()->user()->id)
+        <p><a  href="#"
+                onclick="event.preventDefault();
+                                document.getElementById('delete-form').submit();">
+                Delete this post
+            </a>
+
+            <form id="delete-form" action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: none;">
+                @csrf
+                @method("delete")
+            </form></p>
+    @endif
     
     {!! $post->content !!}
 
@@ -30,6 +43,6 @@
     @endif
 
     @foreach ($post->comments as $comment)
-        <p><strong>{{ $comment->user->name}}</strong>: {{ $comment->body }}</p>
+        <p><a href="{{ route('users.show', $comment->user->id) }}"><strong>{{ $comment->user->name }}</strong></a>: {{ $comment->body }}</p>
     @endforeach
 @endsection

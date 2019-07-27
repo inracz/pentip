@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use GrahamCampbell\Markdown\Facades\Markdown;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Gate;
 
 class PostsController extends Controller
 {
@@ -18,8 +20,15 @@ class PostsController extends Controller
         $data = request()->validate([
             'title' => 'required',
             'description' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'thumbnail' => ''
         ]);
+        
+        $thumbnailPath = $data['thumbnail']->store('uploads', 'public');
+        $thumbnail = Image::make(public_path("storage/" . $thumbnailPath))->fit(410, 610);
+        $thumbnail->save();
+
+        $data['thumbnail'] = $thumbnailPath;
 
         $post = auth()->user()->posts()->create($data);
 
@@ -35,5 +44,16 @@ class PostsController extends Controller
     {
         $post->content = Markdown::convertToHTML($post->content);
         return view('posts.show', compact('post'));
+    }
+
+    public function destroy(Post $post)
+    {
+        if (auth()->user()->can('update', $post)) {
+            $post->delete();
+        } else {
+            return abort(403);
+        }
+
+        return redirect()->route('users.show', auth()->user()->id);
     }
 }

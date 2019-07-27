@@ -16,10 +16,6 @@
         <p>No posts yet</p>
       @endif
 
-      <ul>
-         @foreach ($user->posts as $post)
-            <li><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></li>
-         @endforeach
-      </ul>
+      @include('partials.posts', ['posts' => $user->posts])
  @endsection
 
