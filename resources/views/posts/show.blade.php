@@ -24,6 +24,8 @@
     {!! $post->content !!}
 
     <hr>
+        <p><likes :post="{{ $post->id }}" :default="{{ json_encode($post->isLikedBy(auth()->user())) }}" :likes="{{ $post->likers->count() }}" /></p>
+    <hr>
     
     <h3>Comments</h3>
 

@@ -20,6 +20,7 @@ Route::patch('/profile', 'UsersController@update')->name('users.update');
 
 Route::get('/posts/create', 'PostsController@create')->name('posts.create');
 Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
+Route::post('/posts/{post}/toggleLike', 'PostsController@toggleLike')->name('posts.toggleLike');
 Route::post('/posts', 'PostsController@store')->name('posts.store');
 Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy');
 

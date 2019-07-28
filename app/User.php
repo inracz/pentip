@@ -8,10 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Events\UserCreated;
 use Overtrue\LaravelFollow\Traits\CanSubscribe;
 use Overtrue\LaravelFollow\Traits\CanBeSubscribed;
+use Overtrue\LaravelFollow\Traits\CanLike;
 
 class User extends Authenticatable
 {
-    use Notifiable, CanSubscribe, CanBeSubscribed;
+    use Notifiable, CanSubscribe, CanBeSubscribed, CanLike;
 
     /**
      * The attributes that are mass assignable.

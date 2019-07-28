@@ -56,4 +56,15 @@ class PostsController extends Controller
 
         return redirect()->route('users.show', auth()->user()->id);
     }
+
+    public function toggleLike(Post $post)
+    {
+        auth()->user()->toggleLike($post);
+
+        return response()->json([
+            'status' => 200,
+            'hasLiked' => auth()->user()->hasLiked($post),
+            'likes' => $post->likers->count()
+        ]);
+    }
 }
