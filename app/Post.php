@@ -7,11 +7,13 @@ use Overtrue\LaravelFollow\Traits\CanBeLiked;
 use Actuallymab\LaravelComment\HasComments;
 use Actuallymab\LaravelComment\Contracts\Commentable;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use EloquentFilter\Filterable;
 
 class Post extends Model implements Commentable 
 {
     use CanBeLiked, 
-        HasComments;
+        HasComments,
+        Filterable;
 
     protected $guarded = [];
 

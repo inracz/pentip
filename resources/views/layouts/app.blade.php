@@ -52,6 +52,13 @@
             @endguest
         </ul>
 
+        <div>
+            <form method="get" action="{{ route('posts.search') }}">
+                <input type="search" name="search" id="search">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
         <main>
             @yield('content')
         </main>

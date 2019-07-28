@@ -18,6 +18,12 @@ Route::post('/users/{user}/toggleSubscribe', 'UsersController@toggleSubscribe')-
 Route::get('/profile/edit', 'UsersController@edit')->name('users.edit');
 Route::patch('/profile', 'UsersController@update')->name('users.update');
 
+Route::get('/search', function() {
+    return view('posts.search');
+})->name('posts.search');
+
+
+Route::get('/posts', 'PostsController@index')->name('posts.index');
 Route::get('/posts/create', 'PostsController@create')->name('posts.create');
 Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
 Route::post('/posts/{post}/toggleLike', 'PostsController@toggleLike')->name('posts.toggleLike');

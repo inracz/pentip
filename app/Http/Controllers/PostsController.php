@@ -12,7 +12,12 @@ class PostsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except(['show', 'index']);
+    }
+
+    public function index()
+    {
+        return Post::filter(request()->all())->with('user')->simplePaginate(30)->appends(request()->except('page'));
     }
 
     public function store()

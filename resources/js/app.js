@@ -5,8 +5,15 @@
  */
 
 require('./bootstrap');
+import moment from 'moment'
 
 window.Vue = require('vue');
+
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value), "YYYYMMDD").fromNow()
+    }
+})
 
 /**
  * The following block of code may be used to automatically register your
@@ -21,6 +28,8 @@ window.Vue = require('vue');
 
 Vue.component('subscribe-button', require('./components/SubscribeButton.vue').default);
 Vue.component('likes', require('./components/Likes.vue').default);
+Vue.component('post-list', require('./components/PostList.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
