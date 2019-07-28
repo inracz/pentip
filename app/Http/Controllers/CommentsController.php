@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Comment;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -21,5 +22,16 @@ class CommentsController extends Controller
         auth()->user()->comment($post, $data['body']);
 
         return redirect()->route('posts.show', $post->id);
+    }
+
+    public function toggleLike(Comment $comment)
+    {
+        auth()->user()->toggleLike($comment);
+
+        return response()->json([
+            'status' => 200,
+            'hasLiked' => auth()->user()->hasLiked($comment),
+            'likes' => $comment->likers->count()
+        ]);
     }
 }

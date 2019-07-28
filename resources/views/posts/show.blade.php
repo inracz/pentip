@@ -24,7 +24,7 @@
     {!! $post->content !!}
 
     <hr>
-        <p><likes :post="{{ $post->id }}" :default="{{ json_encode($post->isLikedBy(auth()->user())) }}" :likes="{{ $post->likers->count() }}" /></p>
+        <p><likes :api="'{{ route('posts.toggleLike', $post->id) }}'" :default="{{ json_encode($post->isLikedBy(auth()->user())) }}" :likes="{{ $post->likers->count() }}" /></p>
     <hr>
     
     <h3>Comments</h3>
@@ -47,6 +47,9 @@
     @endif
 
     @foreach ($post->comments as $comment)
-        <p><a href="{{ route('users.show', $comment->user->id) }}"><strong>{{ $comment->user->name }}</strong></a>: {{ $comment->comment }}</p>
+        <div>
+            <p><a href="{{ route('users.show', $comment->user->id) }}"><strong>{{ $comment->user->name }}</strong></a>: {{ $comment->comment }}</p>
+            <p><likes :api="'{{ route('comments.toggleLike', $comment->id) }}'" :default="{{ json_encode($comment->isLikedBy(auth()->user())) }}" :likes="{{ $comment->likers->count() }}" /></p>
+        </div>
     @endforeach
 @endsection

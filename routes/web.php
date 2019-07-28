@@ -25,5 +25,6 @@ Route::post('/posts', 'PostsController@store')->name('posts.store');
 Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy');
 
 Route::post('/posts/{post}/comments', 'CommentsController@store')->name('comments.store');
+Route::post('/comments/{comment}/toggleLike', 'CommentsController@toggleLike')->name('comments.toggleLike');
 
 Auth::routes();

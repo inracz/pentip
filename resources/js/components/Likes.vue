@@ -12,9 +12,9 @@
 
     export default {
         props: {
-            post: Number,
             default: Boolean,
-            likes: Number
+            likes: Number,
+            api: String
         },
 
         data: () => {
@@ -27,7 +27,7 @@
 
         methods: {
             toggleLike() {
-                axios.post(Laravel.baseUrl + '/posts/' + this.post + '/toggleLike')
+                axios.post(this.api)
                     .then((response) => {
                         this.hasLiked = response.data.hasLiked
                         this.count = response.data.likes

@@ -1852,9 +1852,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    post: Number,
     "default": Boolean,
-    likes: Number
+    likes: Number,
+    api: String
   },
   data: function data() {
     return {
@@ -1867,7 +1867,7 @@ __webpack_require__.r(__webpack_exports__);
     toggleLike: function toggleLike() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(Laravel.baseUrl + '/posts/' + this.post + '/toggleLike').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(this.api).then(function (response) {
         _this.hasLiked = response.data.hasLiked;
         _this.count = response.data.likes;
 
