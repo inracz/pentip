@@ -54,7 +54,7 @@
         <p>No comments yet</p>
     @endif
 
-    @foreach ($post->comments as $comment)
+    @foreach ($post->comments()->with('user')->get() as $comment)
         <div>
             <p><a href="{{ route('users.show', $comment->user->id) }}"><strong>{{ $comment->user->name }}</strong></a>: {{ $comment->comment }}</p>
             @auth

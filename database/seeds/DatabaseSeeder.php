@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             for ($i = 0; $i < $postCount; $i++) {
                 $user->posts()->save(factory(App\Post::class)->make());
             }
-        });
 
+        });
     }
 }
