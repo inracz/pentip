@@ -42,11 +42,11 @@
         </div>
     </form>
 
-    @if ($post->comments->count() === 0)
+    @if ($post->totalCommentsCount() === 0)
         <p>No comments yet</p>
     @endif
 
     @foreach ($post->comments as $comment)
-        <p><a href="{{ route('users.show', $comment->user->id) }}"><strong>{{ $comment->user->name }}</strong></a>: {{ $comment->body }}</p>
+        <p><a href="{{ route('users.show', $comment->user->id) }}"><strong>{{ $comment->user->name }}</strong></a>: {{ $comment->comment }}</p>
     @endforeach
 @endsection

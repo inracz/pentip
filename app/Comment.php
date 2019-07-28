@@ -1,26 +1,12 @@
 <?php
-
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Actuallymab\LaravelComment\Models\Comment as LaravelComment;
 
-class Comment extends Model
+class Comment extends LaravelComment
 {
-    protected $guarded = [];
-    
-    /**
-     * User relationship
-     */
     public function user()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Post relationship
-     */
-    public function post()
-    {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(User::class, 'commented_id');
     }
 }

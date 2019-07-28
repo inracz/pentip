@@ -9,10 +9,15 @@ use App\Events\UserCreated;
 use Overtrue\LaravelFollow\Traits\CanSubscribe;
 use Overtrue\LaravelFollow\Traits\CanBeSubscribed;
 use Overtrue\LaravelFollow\Traits\CanLike;
+use Actuallymab\LaravelComment\CanComment;
 
 class User extends Authenticatable
 {
-    use Notifiable, CanSubscribe, CanBeSubscribed, CanLike;
+    use Notifiable, 
+        CanSubscribe, 
+        CanBeSubscribed, 
+        CanLike, 
+        CanComment;
 
     /**
      * The attributes that are mass assignable.
@@ -71,6 +76,6 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'commented_id');
     }
 }

@@ -7,15 +7,18 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(Post $post)
     {
         $data = request()->validate([
             'body' => 'required'
         ]);
 
-        $data['user_id'] = auth()->user()->id;
-
-        Post::find($post->id)->comments()->create($data);
+        auth()->user()->comment($post, $data['body']);
 
         return redirect()->route('posts.show', $post->id);
     }

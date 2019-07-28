@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Overtrue\LaravelFollow\Traits\CanBeLiked;
+use Actuallymab\LaravelComment\HasComments;
+use Actuallymab\LaravelComment\Contracts\Commentable;
 
-class Post extends Model
+class Post extends Model implements Commentable 
 {
-    use CanBeLiked;
+    use CanBeLiked, 
+        HasComments;
 
     protected $guarded = [];
 
@@ -17,13 +20,5 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Comments relationship
-     */
-    public function comments()
-    {
-        return $this->hasMany(Comment::class)->latest();
     }
 }
