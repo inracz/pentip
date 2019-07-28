@@ -6,10 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Events\UserCreated;
+use Overtrue\LaravelFollow\Traits\CanSubscribe;
+use Overtrue\LaravelFollow\Traits\CanBeSubscribed;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, CanSubscribe, CanBeSubscribed;
 
     /**
      * The attributes that are mass assignable.

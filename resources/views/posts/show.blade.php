@@ -6,18 +6,20 @@
 
     <hr>
 
-    @if ($post->user->id == auth()->user()->id)
-        <p><a  href="#"
-                onclick="event.preventDefault();
-                                document.getElementById('delete-form').submit();">
-                Delete this post
-            </a>
+    @auth
+        @if ($post->user->id == auth()->user()->id)
+            <p><a  href="#"
+                    onclick="event.preventDefault();
+                                    document.getElementById('delete-form').submit();">
+                    Delete this post
+                </a>
 
-            <form id="delete-form" action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: none;">
-                @csrf
-                @method("delete")
-            </form></p>
-    @endif
+                <form id="delete-form" action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: none;">
+                    @csrf
+                    @method("delete")
+                </form></p>
+        @endif
+    @endauth
     
     {!! $post->content !!}
 

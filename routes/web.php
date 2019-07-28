@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/users/{user}', 'UsersController@show')->name('users.show');
+Route::post('/users/{user}/toggleSubscribe', 'UsersController@toggleSubscribe')->name('users.toggleSubscribe');
 Route::get('/profile/edit', 'UsersController@edit')->name('users.edit');
 Route::patch('/profile', 'UsersController@update')->name('users.update');
 

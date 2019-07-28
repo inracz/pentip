@@ -43,4 +43,17 @@ class UsersController extends Controller
 
         return redirect()->route('users.show', auth()->user()->id);
     }
+
+    /**
+     * Subscribe to a user
+     */
+    public function toggleSubscribe(User $user)
+    {
+        auth()->user()->toggleSubscribe($user);
+
+        return response()->json([
+            'status' => 200,
+            'isSubscribed' => auth()->user()->hasSubscribed($user)
+        ]);
+    }
 }

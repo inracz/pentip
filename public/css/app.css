@@ -1,6 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
-
-.posts {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+@import url(https://fonts.googleapis.com/css?family=Nunito);.posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
