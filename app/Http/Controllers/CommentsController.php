@@ -26,12 +26,19 @@ class CommentsController extends Controller
 
     public function toggleLike(Comment $comment)
     {
-        auth()->user()->toggleLike($comment);
+        if (auth()->user()->can('like', $comment)) {
+            auth()->user()->toggleLike($comment);
 
-        return response()->json([
-            'status' => 200,
-            'hasLiked' => auth()->user()->hasLiked($comment),
-            'likes' => $comment->likers->count()
-        ]);
+            return response()->json([
+                'status' => 200,
+                'hasLiked' => auth()->user()->hasLiked($comment),
+                'likes' => $comment->likers->count()
+            ]);
+        } else {
+            return response()->json([
+                'status' => 403,
+                'message' => 'Cannot like this comment'
+            ]);
+        }  
     }
 }

@@ -59,12 +59,19 @@ class PostsController extends Controller
 
     public function toggleLike(Post $post)
     {
-        auth()->user()->toggleLike($post);
+        if (auth()->user()->can('like', $post)) {
+            auth()->user()->toggleLike($post);
 
-        return response()->json([
-            'status' => 200,
-            'hasLiked' => auth()->user()->hasLiked($post),
-            'likes' => $post->likers->count()
-        ]);
+            return response()->json([
+                'status' => 200,
+                'hasLiked' => auth()->user()->hasLiked($post),
+                'likes' => $post->likers->count()
+            ]);
+        } else {
+            return response()->json([
+                'status' => 403,
+                'message' => 'Cannot like this post'
+            ]);
+        }  
     }
 }
