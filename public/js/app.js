@@ -1953,6 +1953,7 @@ __webpack_require__.r(__webpack_exports__);
             'Content-Type': 'application/json'
           }
         }).then(function (response) {
+          console.log(response);
           _this.next = response.data.links.next;
           if (_this.posts == 'loading') _this.posts = [];
           _this.posts = _this.posts.concat(response.data.data);

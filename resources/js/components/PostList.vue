@@ -45,7 +45,6 @@ export default {
 
     methods: {
         appendPosts() {
-            
             if (this.next != null) {
                 axios.get(this.next, {
                         headers: {
@@ -53,6 +52,7 @@ export default {
                         }
                     })
                     .then((response) => {
+                        console.log(response)
                         this.next = response.data.links.next
 
                         if (this.posts == 'loading')
