@@ -71,4 +71,20 @@ class UsersController extends Controller
             'isSubscribed' => auth()->user()->hasSubscribed($user)
         ]);
     }
+
+    /**
+     * Show user's notifications
+     * 
+     * @return \Illuminate\View\View Notifications
+     */
+    public function notifications()
+    {
+        $unread = auth()->user()->unreadNotifications;
+
+        $unread->markAsRead();
+
+        return view('users.notifications', [
+            'notifications' => $unread
+        ]);
+    }
 }

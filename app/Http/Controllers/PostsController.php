@@ -38,9 +38,10 @@ class PostsController extends Controller
      */
     public function feed()
     {
+        auth()->user()->unreadNotifications->markAsRead();
+
         $users = auth()->user()->subscriptions()->pluck('id')->toArray(); // Get IDs of user's subscriptions
 
-        
         if (request()->ajax()) { // If the request is AJAX
             return Post::whereIn('user_id', $users)->latest()->with('user')->simplePaginate(30)->appends(request()->except('page'));
         }
@@ -53,9 +54,9 @@ class PostsController extends Controller
      * 
      * @return \Illuminate\Http\RedirectResponse Redirect to the newly created post
      */
-    public function store()
+    public function store(Request $request)
     {
-        $data = request()->validate([
+        $data = $request->validate([
             'title' => 'required',
             'description' => 'required',
             'content' => 'required',
@@ -63,11 +64,13 @@ class PostsController extends Controller
         ]);
         
         // Upload the thumbnail to the server and resize
-        $thumbnailPath = $data['thumbnail']->store('uploads', 'public');
-        $thumbnail = Image::make(public_path("storage/" . $thumbnailPath))->fit(410, 610);
-        $thumbnail->save();
+        if (isset($data['thumbnail'])) {
+            $thumbnailPath = $data['thumbnail']->store('uploads', 'public');
+            $thumbnail = Image::make(public_path("storage/" . $thumbnailPath))->fit(410, 610);
+            $thumbnail->save();
 
-        $data['thumbnail'] = $thumbnailPath;
+            $data['thumbnail'] = $thumbnailPath;
+        }
 
         $post = auth()->user()->posts()->create($data);
 

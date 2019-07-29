@@ -11,6 +11,7 @@ use EloquentFilter\Filterable;
 use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Viewable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
+use App\Events\PostCreated;
 
 class Post extends Model implements Commentable, ViewableContract
 {
@@ -20,6 +21,15 @@ class Post extends Model implements Commentable, ViewableContract
         Viewable;
 
     protected $guarded = [];
+
+    /**
+     * The event map for a post
+     * 
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => PostCreated::class
+    ];
 
     /**
      * User relationship

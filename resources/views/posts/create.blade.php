@@ -17,7 +17,7 @@
 
     <div>
         <label for="thumbnail">Thumbnail</label>
-        <input type="file" name="thumbnail" id="thumbnail" required>
+        <input type="file" name="thumbnail" id="thumbnail">
 
         @error('thumbnail')
             <div>{{ $message }}</div>
