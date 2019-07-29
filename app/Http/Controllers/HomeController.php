@@ -8,7 +8,7 @@ use App\Post;
 class HomeController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * Show the homepage
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */

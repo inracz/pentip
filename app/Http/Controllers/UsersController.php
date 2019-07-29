@@ -7,6 +7,11 @@ use App\User;
 
 class UsersController extends Controller
 {
+    /**
+     * Create a new controller instance
+     * 
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth')->except('show');
@@ -14,6 +19,9 @@ class UsersController extends Controller
 
     /**
      * User's profile
+     * 
+     * @param \App\User User
+     * @return \Illuminate\View\View User's profile view
      */
     public function show(User $user)
     {
@@ -22,6 +30,8 @@ class UsersController extends Controller
 
     /**
      * Show form for editing the user's profile
+     * 
+     * @return  \Illuminate\View\View Edit form
      */
     public function edit()
     {
@@ -32,6 +42,8 @@ class UsersController extends Controller
 
     /**
      * Save the edit form
+     * 
+     * @return \Illuminate\Http\RedirectResponse Redirect to the user's profile
      */
     public function update()
     {
@@ -46,6 +58,9 @@ class UsersController extends Controller
 
     /**
      * Subscribe to a user
+     * 
+     * @param \App\User The user you want to subscribe to
+     * @return string API JSON response
      */
     public function toggleSubscribe(User $user)
     {

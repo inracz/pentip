@@ -8,11 +8,22 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
+    /**
+     * Create a new controller instance
+     * 
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Store a new comment
+     * 
+     * @param App\Post The post user is commenting on
+     * @return \Illuminate\Http\RedirectResponse Redirect to the post user is commenting on
+     */
     public function store(Post $post)
     {
         $data = request()->validate([
@@ -24,6 +35,12 @@ class CommentsController extends Controller
         return redirect()->route('posts.show', $post->id);
     }
 
+    /**
+     * Toggle like/dislike on a comment
+     * 
+     * @param App\Comment The comment user wants to like/dislike
+     * @return string An API JSON response or an error message
+     */
     public function toggleLike(Comment $comment)
     {
         if (auth()->user()->can('like', $comment)) {

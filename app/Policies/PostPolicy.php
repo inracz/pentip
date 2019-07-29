@@ -10,11 +10,25 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
+    /**
+     * Can a user update a post?
+     * 
+     * @param \App\User User
+     * @param \App\Post Post
+     * @return bool Result
+     */
     public function update(User $user, Post $post)
     {
         return $user->id == $post->user->id;
     }
 
+    /**
+     * Can a user like a post?
+     * 
+     * @param \App\User User
+     * @param \App\Post Post
+     * @return bool Result
+     */
     public function like(User $user, Post $post)
     {
         return !($user->id == $post->user->id);

@@ -10,6 +10,13 @@ class CommentPolicy
 {
     use HandlesAuthorization;
 
+    /**
+     * Can a user like a comment?
+     * 
+     * @param \App\User User
+     * @param \App\Comment Comment
+     * @return bool Result
+     */
     public function like(User $user, Comment $comment)
     {
         return !($user->id == $comment->user->id);

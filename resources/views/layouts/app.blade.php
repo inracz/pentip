@@ -36,6 +36,7 @@
                 </li>
             @else
                 <li><a href="{{ route('users.show', auth()->user()->id) }}">My Profile</a></li>
+                <li><a href="{{ route('posts.feed') }}">My Feed</a></li>
                 <li><a href="{{ route('posts.create') }}">Create New Post</a></li>
                 <li>
 

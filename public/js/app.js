@@ -1915,6 +1915,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1924,7 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: [],
+      posts: 'loading',
       next: ''
     };
   },
@@ -1933,9 +1935,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (this.next != null) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.next).then(function (response) {
-          console.log(response);
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.next, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(function (response) {
           _this.next = response.data.next_page_url;
+          if (_this.posts == 'loading') _this.posts = [];
           _this.posts = _this.posts.concat(response.data.data);
         });
       }
@@ -55650,38 +55656,51 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "posts" },
-    _vm._l(_vm.posts, function(post) {
-      return _c("div", { key: post.id, staticClass: "post" }, [
-        _c("img", {
-          staticStyle: { padding: "10px" },
-          attrs: {
-            src: post.thumbnail
-              ? "storage/" + post.thumbnail
-              : "/images/default_thumbnail.jpg",
-            width: "120px"
-          }
-        }),
-        _vm._v(" "),
-        _c("div", [
-          _c("a", { attrs: { href: _vm.titleredirect + "/" + post.id } }, [
-            _vm._v(_vm._s(post.title))
-          ]),
-          _c("br"),
+    [
+      _vm.posts.length == 0 ? _c("p", [_vm._v("No posts yet")]) : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.posts, function(post) {
+        return _c("div", { key: post.id, staticClass: "post" }, [
+          _c("img", {
+            staticStyle: { padding: "10px" },
+            attrs: {
+              src: post.thumbnail
+                ? "storage/" + post.thumbnail
+                : "/images/default_thumbnail.jpg",
+              width: "120px"
+            }
+          }),
           _vm._v(" "),
-          _c("small", [_vm._v(_vm._s(_vm._f("formatDate")(post.created_at)))]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v("by "),
-            _c(
-              "a",
-              { attrs: { href: _vm.userredirect + "/" + post.user.id } },
-              [_vm._v(_vm._s(post.user.name))]
-            )
+          _c("div", [
+            _c("a", { attrs: { href: _vm.titleredirect + "/" + post.id } }, [
+              _vm._v(_vm._s(post.title))
+            ]),
+            _c("br"),
+            _vm._v(" "),
+            _c("small", [
+              _vm._v(
+                _vm._s(_vm._f("formatDate")(post.created_at)) +
+                  " | " +
+                  _vm._s(post.time_to_read) +
+                  "m to read "
+              ),
+              _c("br"),
+              _vm._v(" " + _vm._s(post.views) + " views")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v("by "),
+              _c(
+                "a",
+                { attrs: { href: _vm.userredirect + "/" + post.user.id } },
+                [_vm._v(_vm._s(post.user.name))]
+              )
+            ])
           ])
         ])
-      ])
-    }),
-    0
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -67881,7 +67900,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 Vue.filter('formatDate', function (value) {
   if (value) {
-    return moment__WEBPACK_IMPORTED_MODULE_0___default()(String(value), "YYYYMMDD").fromNow();
+    return moment__WEBPACK_IMPORTED_MODULE_0___default()(value).fromNow();
   }
 });
 /**

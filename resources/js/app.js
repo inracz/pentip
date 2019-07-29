@@ -7,11 +7,11 @@
 require('./bootstrap');
 import moment from 'moment'
 
-window.Vue = require('vue');
+window.Vue = require('vue')
 
 Vue.filter('formatDate', function(value) {
     if (value) {
-        return moment(String(value), "YYYYMMDD").fromNow()
+        return moment(value).fromNow()
     }
 })
 

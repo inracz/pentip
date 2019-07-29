@@ -26,6 +26,7 @@
         <p>No posts yet</p>
       @endif
 
-      @include('partials.posts', ['posts' => $user->posts])
+      {{--@include('partials.posts', ['posts' => $user->posts])--}}
+      <post-list api="{{ route('posts.index', ['user_id' => $user->id]) }}" titleredirect="{{ url('/posts/') }}" userredirect="{{ url('/users/') }}"></post-list>
  @endsection
 

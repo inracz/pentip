@@ -17,6 +17,11 @@ class PostFilter extends ModelFilter
         return $this->where('title', 'LIKE', '%' . $title . '%');
     }
 
+    public function user($id)
+    {
+        return $this->where('user_id', '=', $id);
+    }
+
     public function search($query)
     {
         return $this->where('title', 'LIKE', '%' . $query . '%');

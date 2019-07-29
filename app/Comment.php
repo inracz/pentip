@@ -8,6 +8,9 @@ class Comment extends LaravelComment
 {
     use CanBeLiked;
 
+    /**
+     * User relationship
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'commented_id');
