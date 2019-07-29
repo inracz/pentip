@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Search results</h1>
+    <div class="container">
+        <h3>Search results</h3>
 
-    <post-list api="{{ route('posts.index', request()->all()) }}" titleredirect="{{ url('/posts/') }}" userredirect="{{ url('/users/') }}"></post-list>
+        <div class="row">
+            <post-list api="{{ route('posts.index', request()->all()) }}" titleredirect="{{ url('/posts/') }}" userredirect="{{ url('/users/') }}"></post-list>
+        </div>
+    </div>
 @endsection

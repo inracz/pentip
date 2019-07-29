@@ -1,8 +1,8 @@
 <template>
     <p>
-        {{ count }}
-        <button class="like" @click="toggleLike" :class="{'unactive' : !hasLiked}">
-            {{ text }}
+        
+        <button class="btn" @click="toggleLike" :class="{'btn-outline-primary' : hasLiked, 'btn-primary': !hasLiked}">
+           {{ count }} {{ text }}
         </button>
     </p>
 </template>
@@ -37,9 +37,9 @@
 
             changeButton() {
                 if (this.hasLiked) {
-                    this.text = 'Unlike'
+                    this.text = 'likes'
                 } else {
-                    this.text = 'Like'
+                    this.text = 'likes'
                 }
             }
         },
@@ -51,17 +51,3 @@
         }
     }
 </script>
-
-<style>
-    button.like {
-        border: 0;
-        display: inline-block;
-        padding: 10px 15px;
-    }
-
-    button.like.unactive {
-        background-color: cornflowerblue;
-        color: white;
-    }
-
-</style>

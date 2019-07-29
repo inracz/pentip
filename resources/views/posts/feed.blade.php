@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Feed</h1>
+    <div class="container">
+        <h3>New posts from your subscriptions</h3>
 
-    <post-list api="{{ route('posts.feed', request()->all()) }}" titleredirect="{{ url('/posts/') }}" userredirect="{{ url('/users/') }}"></post-list>
+        <div class="row">
+            <post-list api="{{ route('posts.feed', request()->all()) }}" titleredirect="{{ url('/posts/') }}" userredirect="{{ url('/users/') }}"></post-list>
+        </div>
+    </div>
 @endsection

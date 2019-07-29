@@ -23,43 +23,58 @@
 </head>
 <body>
     <div id="app">
-        <ul>
-            <!-- Authentication Links -->
-                <li><a href="{{ route('home') }}">Home</a></li>
-            @guest
-                <li>
-                    <a href="{{ route('login') }}">Login</a>
-                </li>
-                
-                <li>
-                    <a href="{{ route('register') }}">Register</a>
-                </li>
-            @else
-                <li><a href="{{ route('users.show', auth()->user()->id) }}">My Profile</a></li>
-                <li><a href="{{ route('posts.feed') }}">My Feed</a></li>
-                <li><a href="{{ route('posts.create') }}">Create New Post</a></li>
-                <li><a href="{{ route('users.notifications') }}">Notifications ({{ auth()->user()->unreadNotifications()->count() }})</a></li>
-                <li>
+        <header class="main-header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand" href="{{ route('home') }}">Pentip</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                        <a  href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('posts.create') }}">New Post</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('posts.feed') }}">Feed</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ auth()->user()->name }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('users.show', auth()->user()->id) }}">My Profile</a>
+                                        <a class="dropdown-item" href="{{ route('users.notifications') }}">Notifications ({{ auth()->user()->unreadNotifications()->count() }})</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                            Logout
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </a>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0" action="{{ route('posts.search') }}" method="get">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
-                </li>
-            @endguest
-        </ul>
-
-        <div>
-            <form method="get" action="{{ route('posts.search') }}">
-                <input type="search" name="search" id="search">
-                <button type="submit">Search</button>
-            </form>
-        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
         <main>
             @yield('content')

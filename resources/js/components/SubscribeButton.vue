@@ -49,7 +49,8 @@
     button.sub {
         border: 0;
         display: inline-block;
-        padding: 10px 15px;
+        padding: 5px 10px;
+        font-size: .8em;
     }
 
     button.sub.unactive {
