@@ -21,13 +21,13 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        factory(App\User::class, 5)->create()->each(function($user) {
-            $postCount = rand(1,5);
+        factory(App\User::class, 15)->create();
 
-            for ($i = 0; $i < $postCount; $i++) {
-                $user->posts()->save(factory(App\Post::class)->make());
-            }
+        $postCount = 500;
 
-        });
+        for ($i = 0; $i < $postCount; $i++) {
+            $user = App\User::inRandomOrder()->first();
+            $user->posts()->save(factory(App\Post::class)->make());
+        }
     }
 }

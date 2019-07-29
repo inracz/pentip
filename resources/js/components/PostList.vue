@@ -2,7 +2,7 @@
     <div class="posts">
         <p v-if="posts.length == 0">No posts yet</p>
 
-        <div class="card post" style="max-width: 540px;" v-for="post in posts" :key="post.id" width="120px">
+        <div v-else class="card post" style="max-width: 540px;" v-for="(post, index) in posts" :key="index" width="120px">
             <div class="row no-gutters">
                 <div class="col-md-4 thumbnail">
                     <img :src="post.thumbnail ? `storage/${post.thumbnail}` : '/images/default_thumbnail.jpg'" class="card-img" alt="...">
@@ -45,6 +45,7 @@ export default {
 
     methods: {
         appendPosts() {
+            
             if (this.next != null) {
                 axios.get(this.next, {
                         headers: {
@@ -52,7 +53,7 @@ export default {
                         }
                     })
                     .then((response) => {
-                        this.next = response.data.next_page_url
+                        this.next = response.data.links.next
 
                         if (this.posts == 'loading')
                             this.posts = []
@@ -64,9 +65,8 @@ export default {
 
         scroll () {
             window.onscroll = () => {
-                console.log("scrolled")
+                
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-
                 if (bottomOfWindow) {
                     this.appendPosts()
                 }

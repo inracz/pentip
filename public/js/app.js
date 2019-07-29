@@ -1953,7 +1953,7 @@ __webpack_require__.r(__webpack_exports__);
             'Content-Type': 'application/json'
           }
         }).then(function (response) {
-          _this.next = response.data.next_page_url;
+          _this.next = response.data.links.next;
           if (_this.posts == 'loading') _this.posts = [];
           _this.posts = _this.posts.concat(response.data.data);
         });
@@ -1963,7 +1963,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       window.onscroll = function () {
-        console.log("scrolled");
         var bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
         if (bottomOfWindow) {
@@ -55627,81 +55626,87 @@ var render = function() {
     "div",
     { staticClass: "posts" },
     [
-      _vm.posts.length == 0 ? _c("p", [_vm._v("No posts yet")]) : _vm._e(),
-      _vm._v(" "),
-      _vm._l(_vm.posts, function(post) {
-        return _c(
-          "div",
-          {
-            key: post.id,
-            staticClass: "card post",
-            staticStyle: { "max-width": "540px" },
-            attrs: { width: "120px" }
-          },
-          [
-            _c("div", { staticClass: "row no-gutters" }, [
-              _c("div", { staticClass: "col-md-4 thumbnail" }, [
-                _c("img", {
-                  staticClass: "card-img",
-                  attrs: {
-                    src: post.thumbnail
-                      ? "storage/" + post.thumbnail
-                      : "/images/default_thumbnail.jpg",
-                    alt: "..."
-                  }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "timeToRead badge badge-dark" }, [
-                  _vm._v(_vm._s(post.time_to_read) + " min")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-8" }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "card-link",
-                        attrs: { href: _vm.titleredirect + "/" + post.id }
-                      },
-                      [_vm._v(_vm._s(post.title))]
-                    )
+      _vm.posts.length == 0
+        ? _c("p", [_vm._v("No posts yet")])
+        : _vm._l(_vm.posts, function(post, index) {
+            return _c(
+              "div",
+              {
+                key: index,
+                staticClass: "card post",
+                staticStyle: { "max-width": "540px" },
+                attrs: { width: "120px" }
+              },
+              [
+                _c("div", { staticClass: "row no-gutters" }, [
+                  _c("div", { staticClass: "col-md-4 thumbnail" }, [
+                    _c("img", {
+                      staticClass: "card-img",
+                      attrs: {
+                        src: post.thumbnail
+                          ? "storage/" + post.thumbnail
+                          : "/images/default_thumbnail.jpg",
+                        alt: "..."
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "timeToRead badge badge-dark" }, [
+                      _vm._v(_vm._s(post.time_to_read) + " min")
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "card-link",
-                        attrs: { href: _vm.userredirect + "/" + post.user.id }
-                      },
-                      [_vm._v("@" + _vm._s(post.user.name))]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0, true),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(
-                        "\n                            Posted " +
-                          _vm._s(_vm._f("formatDate")(post.created_at))
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h5", { staticClass: "card-title" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "card-link",
+                            attrs: { href: _vm.titleredirect + "/" + post.id }
+                          },
+                          [_vm._v(_vm._s(post.title))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "h6",
+                        { staticClass: "card-subtitle mb-2 text-muted" },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "card-link",
+                              attrs: {
+                                href: _vm.userredirect + "/" + post.user.id
+                              }
+                            },
+                            [_vm._v("@" + _vm._s(post.user.name))]
+                          )
+                        ]
                       ),
-                      _c("br"),
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(post.views) +
-                          " views\n                        "
-                      )
+                      _vm._v(" "),
+                      _vm._m(0, true),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v(
+                            "\n                            Posted " +
+                              _vm._s(_vm._f("formatDate")(post.created_at))
+                          ),
+                          _c("br"),
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(post.views) +
+                              " views\n                        "
+                          )
+                        ])
+                      ])
                     ])
                   ])
                 ])
-              ])
-            ])
-          ]
-        )
-      })
+              ]
+            )
+          })
     ],
     2
   )
