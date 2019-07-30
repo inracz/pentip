@@ -33,18 +33,17 @@ $ php artisan serve
 ### Public
 | Method | End point    | Description
 |--------|:-------------|:------------
-| GET    | /articles    | Returns all articles
-| GET    | /articles/{article} | Get an article by URL
-| GET    | /articles/{article}/comments | Get article's comments
+| GET    | /api/posts    | Returns all posts
+| GET    | /api/posts/feed | Get a user's feed
+| GET    | /api/posts/{post}/pdf | Generate a pdf
 
-### Protected (JWT)
+### Protected
 | Method | End point    | Description
 |--------|:-------------|:------------
-| PUT | /users/{user} | Edit a user by ID
-| PUT | /articles/{article} | Edit an article by URL
-| PUT | /comments/{comment} | Edit an comment
-| DELETE | /articles/{article} |  Delete an article by URL
-| DELETE | /comments/{comment} | Delete an comment
+| POST    | /api/posts | Store a new post
+| PATCH    | /api/posts/{post} | Update a post
+| DELETE    | /api/posts/{post} | Delete a post
+| POST    | /api/posts/{post}/toggleLike | Toggle like on the post
 -->
 
    [laravel]: <https://laravel.com>
