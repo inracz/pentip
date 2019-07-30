@@ -26,8 +26,6 @@ $ php artisan db:seed
 $ php artisan serve
 ```
 
-<!---
-
 ## API
 
 ### Public
@@ -44,7 +42,6 @@ $ php artisan serve
 | PATCH    | /api/posts/{post} | Update a post
 | DELETE    | /api/posts/{post} | Delete a post
 | POST    | /api/posts/{post}/toggleLike | Toggle like on the post
--->
 
    [laravel]: <https://laravel.com>
    [vuejs]: <https://vuejs.org/>
