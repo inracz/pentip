@@ -12,6 +12,7 @@
         "actuallymab/laravel-comment": "^1.0",
         "andrefigueira/blog-article-faker": "^1.0",
         "cyrildewit/eloquent-viewable": "^4.0",
+        "dompdf/dompdf": "^0.8.3",
         "fideloper/proxy": "^4.0",
         "graham-campbell/markdown": "^11.0",
         "intervention/image": "^2.5",
@@ -20,7 +21,8 @@
         "laravel/telescope": "^2.0",
         "laravel/tinker": "^1.0",
         "overtrue/laravel-follow": "^1.1",
-        "tucker-eric/eloquentfilter": "^1.4"
+        "tucker-eric/eloquentfilter": "^1.4",
+        "wappla/laravel-markdown-to-pdf": "^0.1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

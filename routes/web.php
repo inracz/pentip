@@ -23,16 +23,24 @@ Route::get('/search', function() {
     return view('posts.search');
 })->name('posts.search');
 
-
-Route::get('/posts', 'PostsController@index')->name('posts.index');
 Route::get('/feed', 'PostsController@feed')->name('posts.feed');
-Route::get('/posts/create', 'PostsController@create')->name('posts.create');
-Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
-Route::post('/posts/{post}/toggleLike', 'PostsController@toggleLike')->name('posts.toggleLike');
-Route::post('/posts', 'PostsController@store')->name('posts.store');
-Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy');
+
+Route::prefix('/posts')->name('posts.')->group(function () {
+    Route::get('/', 'PostsController@index')->name('index');
+    Route::get('/create', 'PostsController@create')->name('create');
+    Route::get('/{post}', 'PostsController@show')->name('show');
+    Route::get('/{post}/pdf', 'PostsController@pdf')->name('pdf');
+    Route::get('/{post}/edit', 'PostsController@edit')->name('edit');
+
+    Route::post('/{post}/toggleLike', 'PostsController@toggleLike')->name('toggleLike');
+    Route::post('/', 'PostsController@store')->name('store');
+    Route::patch('/{post}', 'PostsController@update')->name('update');
+
+    Route::delete('/{post}', 'PostsController@destroy')->name('destroy');
+});
 
 Route::post('/posts/{post}/comments', 'CommentsController@store')->name('comments.store');
+
 Route::post('/comments/{comment}/toggleLike', 'CommentsController@toggleLike')->name('comments.toggleLike');
 
 Auth::routes();

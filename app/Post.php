@@ -67,4 +67,21 @@ class Post extends Model implements Commentable, ViewableContract
         return views($this)->count();
     }
 
+    /**
+     * Convert content to PDF
+     * 
+     * @return string PDF
+     */
+    public function getPdf()
+    {
+        $html = \GrahamCampbell\Markdown\Facades\Markdown::convertToHTML($this->content);
+
+        $dompdf = new \Dompdf\Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+        return $dompdf->stream( str_slug($this->title) );
+    }
+
 }

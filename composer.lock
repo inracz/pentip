@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b8ce24cb2819c9cd46f1f6ffd69999b",
+    "content-hash": "33693b0866820d85660cb6f5bd7ba3a5",
     "packages": [
         {
             "name": "actuallymab/laravel-comment",
@@ -4060,6 +4060,60 @@
                 "environment"
             ],
             "time": "2019-06-15T22:40:20+00:00"
+        },
+        {
+            "name": "wappla/laravel-markdown-to-pdf",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wappla/laravel-markdown-to-pdf.git",
+                "reference": "c3db5eeb13340593be6a140f3cc8b9e25b6834a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wappla/laravel-markdown-to-pdf/zipball/c3db5eeb13340593be6a140f3cc8b9e25b6834a7",
+                "reference": "c3db5eeb13340593be6a140f3cc8b9e25b6834a7",
+                "shasum": ""
+            },
+            "require": {
+                "dompdf/dompdf": "^0.8.2",
+                "erusev/parsedown": "^1.6",
+                "illuminate/http": "^5.5",
+                "illuminate/support": "^5.5",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.5.0|~3.6.0",
+                "phpunit/phpunit": "^6.5|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wappla\\LaravelMarkdownToPDF\\MarkdownToPDFServiceProvider"
+                    ],
+                    "aliases": {
+                        "MarkdownToPDF": "Wappla\\LaravelMarkdownToPDF\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wappla\\LaravelMarkdownToPDF\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Van Hees",
+                    "email": "christoph@wappla.com"
+                }
+            ],
+            "description": "A simple way for generating PDFs using markdown",
+            "time": "2019-04-05T08:17:21+00:00"
         }
     ],
     "packages-dev": [

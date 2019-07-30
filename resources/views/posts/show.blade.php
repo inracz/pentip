@@ -9,7 +9,7 @@
             <p class="card-text pb-4 pt-4"><em>{{ $post->description }}</em></p>
 
             @auth
-                @if ($post->user->id == auth()->user()->id)
+                @can('update', $post)
                     <a class="card-link" href="#"
                             onclick="event.preventDefault();
                                             document.getElementById('delete-form').submit();">
@@ -20,8 +20,10 @@
                             @method("delete")
                         </form>
                     </a>
-                @endif
+                    <a class="card-link" href="{{ route('posts.edit', $post->id) }}">Edit this post</a>
+                @endcan
             @endauth
+            <a class="card-link" href="{{ route('posts.pdf', $post->id) }}">Download as PDF</a>
         </div>
     </div>
 

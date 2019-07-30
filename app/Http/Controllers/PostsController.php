@@ -18,7 +18,7 @@ class PostsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['show', 'index']);
+        $this->middleware('auth')->except(['show', 'index', 'pdf']);
     }
 
     /**
@@ -60,7 +60,7 @@ class PostsController extends Controller
             'title' => 'required',
             'description' => 'required',
             'content' => 'required',
-            'thumbnail' => ''
+            'thumbnail' => 'image'
         ]);
         
         // Upload the thumbnail to the server and resize
@@ -78,13 +78,59 @@ class PostsController extends Controller
     }
 
     /**
+     * Update a post in the database
+     * 
+     * @return \Illuminate\Http\RedirectResponse Redirect to the newly created post
+     */
+    public function update(Request $request, Post $post)
+    {
+        if (!auth()->user()->can('update', $post)) {
+            return abort(403);
+        }
+
+        $data = $request->validate([
+            'title' => '',
+            'description' => '',
+            'content' => '',
+            'thumbnail' => 'image'
+        ]);
+        
+        // Upload the thumbnail to the server and resize
+        if (isset($data['thumbnail'])) {
+            $thumbnailPath = $data['thumbnail']->store('uploads', 'public');
+            $thumbnail = Image::make(public_path("storage/" . $thumbnailPath))->fit(410, 610);
+            $thumbnail->save();
+
+            $data['thumbnail'] = $thumbnailPath;
+        }
+
+        $post->update($data);
+
+        return redirect()->route('posts.show', $post->id);
+    }
+
+    /**
      * Get the form for creating a new post
      * 
      * @return \Illuminate\View\View Form for creating a new post
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.edit');
+    }
+
+    /**
+     * Get the form for editing a new post
+     * 
+     * @return \Illuminate\View\View Form for creating a new post
+     */
+    public function edit(Post $post)
+    {
+        if (!auth()->user()->can('update', $post)) {
+            return abort(403);
+        }
+        
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -140,5 +186,16 @@ class PostsController extends Controller
                 'message' => 'Cannot like this post'
             ]);
         }  
+    }
+
+    /**
+     * Download post as a PDF file
+     * 
+     * @param App\Post Post
+     * @return string PDF file
+     */
+    public function pdf(Post $post)
+    {
+        return $post->getPdf();
     }
 }
