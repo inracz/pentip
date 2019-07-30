@@ -28,7 +28,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return PostResource::collection(Post::latest()->filter(request()->all())->with('user')->simplePaginate(30)->appends(request()->except('page')));
+        return PostResource::collection(Post::filter(request()->all())->latest()->with('user')->simplePaginate(30)->appends(request()->except('page')));
     }
 
     /**
@@ -43,7 +43,7 @@ class PostsController extends Controller
         $users = auth()->user()->subscriptions()->pluck('id')->toArray(); // Get IDs of user's subscriptions
         
         if (request()->ajax()) { // If the request is AJAX
-            return PostResource::collection(Post::whereIn('user_id', $users)->latest()->with('user')->simplePaginate(30)->appends(request()->except('page')));
+            return PostResource::collection(Post::whereIn('user_id', $users)->filter(request()->all())->latest()->with('user')->simplePaginate(30)->appends(request()->except('page')));
         }
     
         return view('posts.feed'); // Otherwise return a view

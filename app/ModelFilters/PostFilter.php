@@ -26,4 +26,13 @@ class PostFilter extends ModelFilter
     {
         return $this->where('title', 'LIKE', '%' . $query . '%');
     }
+
+    public function sort($how)
+    {
+        if ($how == 'asc') {
+            return $this->oldest();
+        } else {
+            return $this->latest();
+        }
+    }
 }
