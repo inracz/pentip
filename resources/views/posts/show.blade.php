@@ -10,16 +10,7 @@
 
             @auth
                 @can('update', $post)
-                    <a class="card-link" href="#"
-                            onclick="event.preventDefault();
-                                            document.getElementById('delete-form').submit();">
-                            Delete this post
-
-                        <form id="delete-form" action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display: none;">
-                            @csrf
-                            @method("delete")
-                        </form>
-                    </a>
+                    <delete-post api="{{ route('posts.destroy', $post->id) }}" redirect="{{ route('users.show', auth()->user()->id) }}"></delete-post>
                     <a class="card-link" href="{{ route('posts.edit', $post->id) }}">Edit this post</a>
                 @endcan
             @endauth

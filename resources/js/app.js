@@ -29,6 +29,8 @@ Vue.filter('formatDate', function(value) {
 Vue.component('subscribe-button', require('./components/SubscribeButton.vue').default);
 Vue.component('likes', require('./components/Likes.vue').default);
 Vue.component('post-list', require('./components/PostList.vue').default);
+Vue.component('delete-post', require('./components/DeletePost.vue').default);
+Vue.component('submit-form', require('./components/SubmitForm.vue').default);
 
 
 /**
