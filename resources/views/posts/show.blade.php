@@ -10,11 +10,12 @@
 
             @auth
                 @can('update', $post)
-                    <delete-post api="{{ route('posts.destroy', $post->id) }}" redirect="{{ route('users.show', auth()->user()->id) }}"></delete-post>
-                    <a class="card-link" href="{{ route('posts.edit', $post->id) }}">Edit this post</a>
+                    <delete-post api="{{ route('api.posts.destroy', $post->id) }}" redirect="{{ route('users.show', auth()->user()->id) }}"></delete-post>
+                    <button class="btn btn-light ml-2 mr-2" href="{{ route('posts.edit', $post->id) }}">Edit this post</button>
                 @endcan
             @endauth
-            <a class="card-link" href="{{ route('posts.pdf', $post->id) }}">Download as PDF</a>
+            <button class="btn btn-light ml-2 mr-2" href="{{ route('api.posts.pdf', $post->id) }}">Download as PDF</button>
+            <bookmark api="{{ route('api.posts.toggleBookmark', $post->id) }}" :default="{{ json_encode(auth()->user()->hasBookmarked($post)) }}"></bookmark>
         </div>
     </div>
 
@@ -28,7 +29,7 @@
         <div class="card-footer text-muted">
             @auth
                 @can('like', $post)
-                    <p><likes :api="'{{ route('posts.toggleLike', $post->id) }}'" :default="{{ json_encode($post->isLikedBy(auth()->user())) }}" :likes="{{ $post->likers->count() }}" /></p>
+                    <p><likes :api="'{{ route('api.posts.toggleLike', $post->id) }}'" :default="{{ json_encode($post->isLikedBy(auth()->user())) }}" :likes="{{ $post->likers->count() }}" /></p>
                 @else
                     {{ $post->likers->count() }} likes
                 @endcan
@@ -70,7 +71,7 @@
                 <p class="card-text"><small class="text-muted">
                 @auth
                     @can('like', $comment)
-                        <p><likes :api="'{{ route('comments.toggleLike', $comment->id) }}'" :default="{{ json_encode($comment->isLikedBy(auth()->user())) }}" :likes="{{ $comment->likers->count() }}" /></p>
+                        <p><likes :api="'{{ route('api.comments.toggleLike', $comment->id) }}'" :default="{{ json_encode($comment->isLikedBy(auth()->user())) }}" :likes="{{ $comment->likers->count() }}" /></p>
                     @else
                         <p>{{ $comment->likers->count() }} likes</p>
                     @endcan

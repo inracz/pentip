@@ -48,7 +48,7 @@
                                     <a class="nav-link" href="{{ route('user.feed') }}">Feed</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">History</a>
+                                    <a class="nav-link" href="{{ route('posts.bookmarks') }}">Bookmarks</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

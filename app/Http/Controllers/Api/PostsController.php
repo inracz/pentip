@@ -32,6 +32,17 @@ class PostsController extends Controller
     }
 
     /**
+     * Get all the latest posts of user's subscriptions
+     * 
+     * @return  \Illuminate\Pagination\Paginator|\Illuminate\View\View Paginated posts
+     */
+    public function bookmarks(Request $request)
+    {
+        $bookmarks = auth()->user()->bookmarks(Post::class);
+        return PostResource::collection($bookmarks->filter(request()->all())->latest()->with('user')->simplePaginate(30)->appends(request()->except('page')));
+    }
+
+    /**
      * Download post as a PDF file
      * 
      * @param App\Post Post
@@ -64,6 +75,22 @@ class PostsController extends Controller
                 'message' => 'Cannot like this post'
             ]);
         }  
+    }
+
+    /**
+     * Toggle bookmark
+     * 
+     * @param App\Post The post user wants to bookmark
+     * @return string An API JSON response
+     */
+    public function toggleBookmark(Post $post)
+    {
+        auth()->user()->toggleBookmark($post);
+
+        return response()->json([
+            'status' => 200,
+            'hasBookmarked' => auth()->user()->hasBookmarked($post)
+        ]);
     }
 
     /**

@@ -12,13 +12,15 @@ use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Viewable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable as ViewableContract;
 use App\Events\PostCreated;
+use Overtrue\LaravelFollow\Traits\CanBeBookmarked;
 
 class Post extends Model implements Commentable, ViewableContract
 {
     use CanBeLiked, 
         HasComments,
         Filterable,
-        Viewable;
+        Viewable,
+        CanBeBookmarked;
 
     protected $guarded = [];
 

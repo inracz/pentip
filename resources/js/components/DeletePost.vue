@@ -1,5 +1,5 @@
 <template>
-<a class="card-link" href="#" @click.prevent="destroyPost">Delete this post</a>
+    <button class="btn btn-light ml-2 mr-2" @click.prevent="destroyPost">Delete this post</button>
 </template>
 
 <script>

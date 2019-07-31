@@ -10,6 +10,7 @@ use Overtrue\LaravelFollow\Traits\CanSubscribe;
 use Overtrue\LaravelFollow\Traits\CanBeSubscribed;
 use Overtrue\LaravelFollow\Traits\CanLike;
 use Actuallymab\LaravelComment\CanComment;
+use Overtrue\LaravelFollow\Traits\CanBookmark;
 
 class User extends Authenticatable
 {
@@ -17,7 +18,8 @@ class User extends Authenticatable
         CanSubscribe, 
         CanBeSubscribed, 
         CanLike, 
-        CanComment;
+        CanComment,
+        CanBookmark;
 
     /**
      * The attributes that are mass assignable.

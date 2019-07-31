@@ -1,7 +1,7 @@
 <template>
-    <button class="btn" @click="toggleLike" :class="{'btn-outline-primary' : hasLiked, 'btn-primary': !hasLiked}">
-        {{ count }} {{ text }}
-    </button>
+        <button class="btn ml-2 mr-2" @click="toggleBookmark" :class="{'btn-light' : hasBookmarked, 'btn-primary': !hasBookmarked}">
+           {{ text }}
+        </button>
 </template>
 
 <script>
@@ -10,40 +10,37 @@
     export default {
         props: {
             default: Boolean,
-            likes: Number,
             api: String
         },
 
         data: () => {
             return {
                 text: '',
-                hasLiked: false,
+                hasBookmarked: false,
                 count: 0
             }
         },
 
         methods: {
-            toggleLike() {
+            toggleBookmark() {
                 axios.post(this.api)
                     .then((response) => {
-                        this.hasLiked = response.data.hasLiked
-                        this.count = response.data.likes
+                        this.hasBookmarked = response.data.hasBookmarked
                         this.changeButton()
                     })
             },
 
             changeButton() {
-                if (this.hasLiked) {
-                    this.text = 'likes'
+                if (this.hasBookmarked) {
+                    this.text = 'Remove the bookmark'
                 } else {
-                    this.text = 'likes'
+                    this.text = 'Bookmark'
                 }
             }
         },
 
         created() {
-            this.hasLiked = this.default
-            this.count = this.likes
+            this.hasBookmarked = this.default
             this.changeButton()
         }
     }

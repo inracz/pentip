@@ -70,5 +70,13 @@ class PostsController extends Controller
         return view('posts.show', compact('post'));
     }
 
-    
+     /**
+     * Get all the bookmarks
+     * 
+     * @return  \Illuminate\View\View Paginated posts
+     */
+    public function bookmarks()
+    {
+        return view('posts.bookmarks');
+    }
 }

@@ -10,13 +10,17 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::prefix('api')->group(function() {
+Route::prefix('api')->name('api.')->group(function() {
+
+    Route::post('/comments/{comment}/toggleLike', 'CommentsController@toggleLike')->name('comments.toggleLike');
 
     Route::prefix('posts')->name('posts.')->group(function () {
         Route::get('/', 'Api\\PostsController@index')->name('index');
         Route::get('feed', 'Api\\PostsController@feed')->name('feed');
+        Route::get('bookmarks', 'Api\\PostsController@bookmarks')->name('bookmarks');
         Route::get('/{post}/pdf', 'Api\\PostsController@pdf')->name('pdf');
         Route::post('/{post}/toggleLike', 'Api\\PostsController@toggleLike')->name('toggleLike');
+        Route::post('/{post}/toggleBookmark', 'Api\\PostsController@toggleBookmark')->name('toggleBookmark');
         Route::post('/', 'Api\\PostsController@store')->name('store');
         Route::patch('/{post}', 'Api\\PostsController@update')->name('update');
         Route::delete('/{post}', 'Api\\PostsController@destroy')->name('destroy');
@@ -49,13 +53,14 @@ Route::get('/search', function() {
 })->name('posts.search');
 
 Route::prefix('/posts')->name('posts.')->group(function () {
+
+    Route::get('/bookmarks', 'PostsController@bookmarks')->name('bookmarks');
     Route::get('/create', 'PostsController@create')->name('create');
     Route::get('/{post}', 'PostsController@show')->name('show');
     Route::get('/{post}/edit', 'PostsController@edit')->name('edit');
+
 });
 
 Route::post('/posts/{post}/comments', 'CommentsController@store')->name('comments.store');
-
-Route::post('/comments/{comment}/toggleLike', 'CommentsController@toggleLike')->name('comments.toggleLike');
 
 Auth::routes();

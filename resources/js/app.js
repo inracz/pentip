@@ -31,6 +31,7 @@ Vue.component('likes', require('./components/Likes.vue').default);
 Vue.component('post-list', require('./components/PostList.vue').default);
 Vue.component('delete-post', require('./components/DeletePost.vue').default);
 Vue.component('submit-form', require('./components/SubmitForm.vue').default);
+Vue.component('bookmark', require('./components/Bookmark.vue').default);
 
 
 /**

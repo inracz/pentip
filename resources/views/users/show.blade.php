@@ -36,7 +36,7 @@
       @endif
 
       {{--@include('partials.posts', ['posts' => $user->posts])--}}
-      <post-list api="{{ route('posts.index', ['user_id' => $user->id]) }}" titleredirect="{{ url('/posts/') }}" userredirect="{{ url('/users/') }}"></post-list>
+      <post-list api="{{ route('api.posts.index', ['user_id' => $user->id]) }}" titleredirect="{{ url('/posts/') }}" userredirect="{{ url('/users/') }}"></post-list>
 
 </div>
 @endsection
