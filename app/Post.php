@@ -86,4 +86,8 @@ class Post extends Model implements Commentable, ViewableContract
         return $dompdf->stream( str_slug($this->title) );
     }
 
+    public function scopeFilterAndPaginate($query)
+    {
+        return $query->filter(request()->all())->latest()->with('user')->simplePaginate(30)->appends(request()->except('page'));
+    }
 }

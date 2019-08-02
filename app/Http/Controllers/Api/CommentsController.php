@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Post;
-use App\Comment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Comment;
+use App\Post;
+use App\Http\Resources\CommentResource;
 
 class CommentsController extends Controller
 {
@@ -16,6 +18,16 @@ class CommentsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * Get filtered comments and paginate
+     * 
+     * @return \Illuminate\Pagination\Paginator Paginated comments
+     */
+    public function index()
+    {
+        return CommentResource::collection(Comment::filterAndPaginate());
     }
 
     /**
@@ -59,3 +71,4 @@ class CommentsController extends Controller
         }  
     }
 }
+

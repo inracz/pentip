@@ -12,7 +12,11 @@
 */
 Route::prefix('api')->name('api.')->group(function() {
 
-    Route::post('/comments/{comment}/toggleLike', 'CommentsController@toggleLike')->name('comments.toggleLike');
+    Route::get('/posts/{post}/comments', 'Api\\CommentsController@index')->name('comments.index');
+    Route::post('/posts/{post}/comments', 'Api\\CommentsController@store')->name('comments.store');
+    Route::prefix('comments')->name('comments.')->group(function () {
+        Route::post('/{comment}/toggleLike', 'Api\\CommentsController@toggleLike')->name('toggleLike');
+    });
 
     Route::prefix('posts')->name('posts.')->group(function () {
         Route::get('/', 'Api\\PostsController@index')->name('index');
@@ -60,7 +64,5 @@ Route::prefix('/posts')->name('posts.')->group(function () {
     Route::get('/{post}/edit', 'PostsController@edit')->name('edit');
 
 });
-
-Route::post('/posts/{post}/comments', 'CommentsController@store')->name('comments.store');
 
 Auth::routes();

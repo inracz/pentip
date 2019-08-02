@@ -17,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return PostResource::collection(Post::filter(request()->all())->latest()->with('user')->simplePaginate(30)->appends(request()->except('page')));
+        return PostResource::collection(Post::filterAndPaginate());
     }
 
     /**
@@ -28,7 +28,7 @@ class PostsController extends Controller
     public function feed(Request $request)
     {
         $users = auth()->user()->subscriptions()->pluck('id')->toArray(); // Get IDs of user's subscriptions   
-        return PostResource::collection(Post::whereIn('user_id', $users)->filter(request()->all())->latest()->with('user')->simplePaginate(30)->appends(request()->except('page')));
+        return PostResource::collection(Post::whereIn('user_id', $users)->filterAndPaginate());
     }
 
     /**
@@ -39,7 +39,7 @@ class PostsController extends Controller
     public function bookmarks(Request $request)
     {
         $bookmarks = auth()->user()->bookmarks(Post::class);
-        return PostResource::collection($bookmarks->filter(request()->all())->latest()->with('user')->simplePaginate(30)->appends(request()->except('page')));
+        return PostResource::collection($bookmarks->filterAndPaginate());
     }
 
     /**

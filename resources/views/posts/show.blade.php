@@ -43,7 +43,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form class="form-inline d-flex justify-content-between" method="post" action="{{ route('comments.store', $post->id) }}">
+            <form class="form-inline d-flex justify-content-between" method="post" action="{{ route('api.comments.store', $post->id) }}">
                 @csrf
 
                 <div class="form-group flex-grow-1">

@@ -32,16 +32,21 @@ $ php artisan serve
 | Method | End point    | Description
 |--------|:-------------|:------------
 | GET    | /api/posts    | Returns all posts
-| GET    | /api/posts/feed | Get a user's feed
+| GET    | /api/posts{post}/comments | Get post's comments
 | GET    | /api/posts/{post}/pdf | Generate a pdf
 
 ### Protected
 | Method | End point    | Description
 |--------|:-------------|:------------
-| POST    | /api/posts | Store a new post
-| PATCH    | /api/posts/{post} | Update a post
-| DELETE    | /api/posts/{post} | Delete a post
-| POST    | /api/posts/{post}/toggleLike | Toggle like on the post
+| GET    | /api/posts/bookmarks | Get user's bookmarks
+| GET    | /api/posts/feed | Get a user's feed
+| POST   | /api/posts | Store a new post
+| POST   | /api/posts/{post}/comments | Store a new comment
+| POST   | /api/posts/{post}/toggleLike | Toggle like on the post
+| POST   | /api/comments/{comment}/toggleLike | Toggle like on the comment
+| POST   | /api/posts/{post}/toggleBookmark | Bookmark a post
+| PATCH  | /api/posts/{post} | Update a post
+| DELETE | /api/posts/{post} | Delete a post
 
    [laravel]: <https://laravel.com>
    [vuejs]: <https://vuejs.org/>
