@@ -13,9 +13,9 @@
     <div class="card-text">
 
         @if (Route::currentRouteName() == 'posts.create')
-        <form method="post" enctype="multipart/form-data" action="{{ route('posts.store') }}">
+        <form method="post" enctype="multipart/form-data" action="{{ route('api.posts.store') }}">
         @else
-        <form method="post" enctype="multipart/form-data" action="{{ route('posts.update', $post->id) }}">
+        <form method="post" enctype="multipart/form-data" action="{{ route('api.posts.update', $post->id) }}">
             @method('patch')
         @endif
 

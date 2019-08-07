@@ -11,17 +11,20 @@
             @auth
                 @can('update', $post)
                     <delete-post api="{{ route('api.posts.destroy', $post->id) }}" redirect="{{ route('users.show', auth()->user()->id) }}"></delete-post>
-                    <button class="btn btn-light ml-2 mr-2" href="{{ route('posts.edit', $post->id) }}">Edit this post</button>
+                    <a class="btn btn-light ml-2 mr-2" href="{{ route('posts.edit', $post->id) }}">Edit this post</a>
                 @endcan
             @endauth
-            <button class="btn btn-light ml-2 mr-2" href="{{ route('api.posts.pdf', $post->id) }}">Download as PDF</button>
-            <bookmark api="{{ route('api.posts.toggleBookmark', $post->id) }}" :default="{{ json_encode(auth()->user()->hasBookmarked($post)) }}"></bookmark>
+            <a class="btn btn-light ml-2 mr-2" href="{{ route('api.posts.pdf', $post->id) }}">Download as PDF</a>
+
+            @auth
+                <bookmark api="{{ route('api.posts.toggleBookmark', $post->id) }}" :default="{{ json_encode(auth()->user()->hasBookmarked($post)) }}"></bookmark>
+            @endauth
         </div>
     </div>
 
     <div class="card mb-4">
         <div class="card-body">
-            <div class="card-text">
+            <div class="card-text" id="content">
                 {!! $post->content !!}
             </div>
         </div>

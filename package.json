@@ -27,6 +27,8 @@
         "dateformat": "^3.0.3",
         "form-parse": "^0.1.0",
         "moment": "^2.24.0",
+        "say": "^0.16.0",
+        "talkify-tts": "^2.6.0",
         "url-parse": "^1.4.7"
     }
 }
